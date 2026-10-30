@@ -20,10 +20,10 @@ import java.util.List;
 @Configuration @EnableWebSecurity
 public class SecurityConfig {
  @Bean PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
- @Bean JwtEncoder jwtEncoder(@Value("${app.jwt.secret}") String secret) {
+ @Bean JwtEncoder jwtEncoder(@Value("${app.jwt.secret:easyhome-dev-secret-change-this-before-deploying-2026-very-long}") String secret) {
    return new NimbusJwtEncoder(new ImmutableSecret<>(secret.getBytes(StandardCharsets.UTF_8)));
  }
- @Bean JwtDecoder jwtDecoder(@Value("${app.jwt.secret}") String secret) {
+ @Bean JwtDecoder jwtDecoder(@Value("${app.jwt.secret:easyhome-dev-secret-change-this-before-deploying-2026-very-long}") String secret) {
    SecretKey key = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
    return NimbusJwtDecoder.withSecretKey(key).macAlgorithm(MacAlgorithm.HS256).build();
  }
